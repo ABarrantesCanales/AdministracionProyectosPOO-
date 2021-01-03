@@ -10,26 +10,26 @@ package utilidades;
  * @author Ignacio Brenes
  */
 public class Empleado {
-    private double [] cantidadEmpleados;
+    //private double [] cantidadEmpleados;
     private double salario;
     private String nombreEmpleado;
     private int ced;
     public Proyecto proyecto;
 
-    public Empleado(double[] cantidadEmpleados, double salario, String nombreEmpleado, int ced) {
-        this.cantidadEmpleados = cantidadEmpleados;
+    public Empleado(double salario, String nombreEmpleado, int ced) {
+       // this.cantidadEmpleados = cantidadEmpleados;
         this.salario = salario;
         this.nombreEmpleado = nombreEmpleado;
         this.ced = ced;
     }
 
-    public double[] getCantidadEmpleados() {
-        return cantidadEmpleados;
-    }
-
-    public void setCantidadEmpleados(double[] cantidadEmpleados) {
-        this.cantidadEmpleados = cantidadEmpleados;
-    }
+//    public double[] getCantidadEmpleados() {
+//        return cantidadEmpleados;
+//    }
+//
+//    public void setCantidadEmpleados(double[] cantidadEmpleados) {
+//        this.cantidadEmpleados = cantidadEmpleados;
+//    }
 
     public double getSalario() {
         return salario;

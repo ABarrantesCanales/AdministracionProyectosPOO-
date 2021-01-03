@@ -5,25 +5,66 @@
  */
 package utilidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Ignacio Brenes
  */
-public class Empresa {
+public class Empresa implements Serializable{
     private String nombre;
     private ArrayList <Proyecto> listProyecto;
-    private int cedulaJuridica;
     private ArrayList <Departamento> departamentos;
+    private ArrayList<Empleado> listaEmpleados;
+    private int cedulaJuridica;
     public Recursos recursos;
     public Departamento departamento;
-
-    public Empresa(String nombre, ArrayList<Proyecto> listProyecto, int cedulaJuridica, ArrayList<Departamento> departamentos) {
+    public static Empresa singletonObj;
+    
+    /*
+    Se declara la empresa como un objeto singleton para asi tener acceso a sus datos en todas las clases
+    */
+    public static synchronized Empresa getProyecto(){
+        if(singletonObj == null){
+            singletonObj = new Empresa();
+        }
+        return singletonObj;
+    }
+    
+    public void setData(String nombre, ArrayList<Proyecto> listProyecto, int cedulaJuridica, ArrayList<Departamento> departamentos){
         this.nombre = nombre;
         this.listProyecto = listProyecto;
         this.cedulaJuridica = cedulaJuridica;
         this.departamentos = departamentos;
+        this.listaEmpleados = new ArrayList<>();
+    }
+    
+    
+//
+//    public Empresa(String nombre, ArrayList<Proyecto> listProyecto, int cedulaJuridica, ArrayList<Departamento> departamentos) {
+//        this.nombre = nombre;
+//        this.listProyecto = listProyecto;
+//        this.cedulaJuridica = cedulaJuridica;
+//        this.departamentos = departamentos;
+//    }
+    
+    public void addEmpleado(Empleado e){
+        listaEmpleados.add(e);
+    }
+    
+    public ArrayList<Empleado> getEmpleados(){
+        return listaEmpleados;
+    }
+    
+    public Empleado buscarEmpleado(Empleado e){
+        if(listaEmpleados.isEmpty()){
+            return null;
+        }
+        if(listaEmpleados.contains(e)){
+            return e;
+        }
+        return null;
     }
 
     public String getNombre() {

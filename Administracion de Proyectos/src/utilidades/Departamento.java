@@ -13,12 +13,12 @@ import java.util.ArrayList;
  */
 public class Departamento {
     private ArrayList <Proyecto> proyectos;
-    private String [] nombreDepartamento;
-    private float presupuesto;
+    private String nombreDepartamento;
+    private double presupuesto;
     private float cargaTrabajo;
     public Proyecto proyecto;
 
-    public Departamento(ArrayList<Proyecto> proyectos, String[] nombreDepartamento, float presupuesto, float cargaTrabajo) {
+    public Departamento(ArrayList<Proyecto> proyectos, String nombreDepartamento, float presupuesto, float cargaTrabajo) {
         this.proyectos = proyectos;
         this.nombreDepartamento = nombreDepartamento;
         this.presupuesto = presupuesto;
@@ -33,19 +33,19 @@ public class Departamento {
         this.proyectos = proyectos;
     }
 
-    public String[] getNombreDepartamento() {
+    public String getNombreDepartamento() {
         return nombreDepartamento;
     }
 
-    public void setNombreDepartamento(String[] nombreDepartamento) {
+    public void setNombreDepartamento(String nombreDepartamento) {
         this.nombreDepartamento = nombreDepartamento;
     }
 
-    public float getPresupuesto() {
+    public double getPresupuesto() {
         return presupuesto;
     }
 
-    public void setPresupuesto(float presupuesto) {
+    public void setPresupuesto(double presupuesto) {
         this.presupuesto = presupuesto;
     }
 
