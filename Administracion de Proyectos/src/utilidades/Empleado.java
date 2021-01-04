@@ -5,31 +5,24 @@
  */
 package utilidades;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Ignacio Brenes
  */
 public class Empleado {
-    //private double [] cantidadEmpleados;
+    
     private double salario;
     private String nombreEmpleado;
     private int ced;
-    public Proyecto proyecto;
+    public ArrayList<Proyecto> proyectos;
 
     public Empleado(double salario, String nombreEmpleado, int ced) {
-       // this.cantidadEmpleados = cantidadEmpleados;
         this.salario = salario;
         this.nombreEmpleado = nombreEmpleado;
         this.ced = ced;
     }
-
-//    public double[] getCantidadEmpleados() {
-//        return cantidadEmpleados;
-//    }
-//
-//    public void setCantidadEmpleados(double[] cantidadEmpleados) {
-//        this.cantidadEmpleados = cantidadEmpleados;
-//    }
 
     public double getSalario() {
         return salario;

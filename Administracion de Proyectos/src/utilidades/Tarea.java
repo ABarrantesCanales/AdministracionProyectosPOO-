@@ -5,6 +5,8 @@
  */
 package utilidades;
 
+import java.util.Date;
+
 /**
  *
  * @author Ignacio Brenes
@@ -14,6 +16,9 @@ public class Tarea {
     private int indentificador ;
     private float duracion;
     private float tiempo;   
+    private Date fechaEntrega;
+    private boolean terminada;
+    
 
     public Tarea(String nombreTarea, int indentificador, float duracion, float tiempo) {
         this.nombreTarea = nombreTarea;
@@ -52,6 +57,14 @@ public class Tarea {
 
     public void setTiempo(float tiempo) {
         this.tiempo = tiempo;
+    }
+   
+    public boolean estaTerminada(){
+        return terminada;
+    }
+    
+    public void setTerminada(boolean ter){
+        this.terminada = ter;
     }
     
 }

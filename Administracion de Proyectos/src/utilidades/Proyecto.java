@@ -14,8 +14,8 @@ import java.util.Date;
  */
 public class Proyecto {
     private String nombre;
-    private float presupuesto;
-    private float cargaTrabajo;
+    private double presupuesto;
+    private int cargaTrabajo;
     private Date fechaInicio;
     private ArrayList <Tarea> tareas;
     public Jefe jefe;
@@ -23,7 +23,7 @@ public class Proyecto {
     public Empleado empleado;
     public Recursos recursos;
 
-    public Proyecto(String nombre, float presupuesto, float cargaTrabajo, Date fechaInicio, ArrayList<Tarea> tareas) {
+    public Proyecto(String nombre, float presupuesto, int cargaTrabajo, Date fechaInicio, ArrayList<Tarea> tareas) {
         this.nombre = nombre;
         this.presupuesto = presupuesto;
         this.cargaTrabajo = cargaTrabajo;
@@ -39,7 +39,7 @@ public class Proyecto {
         this.nombre = nombre;
     }
 
-    public float getPresupuesto() {
+    public double getPresupuesto() {
         return presupuesto;
     }
 
@@ -51,7 +51,7 @@ public class Proyecto {
         return cargaTrabajo;
     }
 
-    public void setCargaTrabajo(float cargaTrabajo) {
+    public void setCargaTrabajo(int cargaTrabajo) {
         this.cargaTrabajo = cargaTrabajo;
     }
 
