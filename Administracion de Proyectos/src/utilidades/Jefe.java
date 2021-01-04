@@ -11,11 +11,12 @@ import java.util.ArrayList;
  *
  * @author Ignacio Brenes
  */
-public class Jefe {
+public class Jefe extends Usuario{
     private ArrayList cantProyectos;
     public Proyecto proyecto;
 
-    public Jefe(ArrayList<Proyecto> canProyectos) {
+    public Jefe(ArrayList<Proyecto> canProyectos, String usuario, String contra) {
+        super(usuario, contra);
         this.cantProyectos = canProyectos;
     }
 
