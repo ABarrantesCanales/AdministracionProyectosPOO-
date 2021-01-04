@@ -12,20 +12,37 @@ import java.util.ArrayList;
  * @author Ignacio Brenes
  */
 public class Jefe extends Usuario{
-    private ArrayList cantProyectos;
-    public Proyecto proyecto;
+    private ArrayList<Proyecto> Proyectos;
 
-    public Jefe(ArrayList<Proyecto> canProyectos, String usuario, String contra) {
+    public Jefe(String usuario, String contra) {
         super(usuario, contra);
-        this.cantProyectos = canProyectos;
+        Proyectos = new ArrayList<>();
     }
 
-    public ArrayList<Proyecto> getCanProyectos() {
-        return cantProyectos;
+    public ArrayList<Proyecto> getProyectos() {
+        return Proyectos;
     }
 
-    public void setCanProyectos(ArrayList proyectos) {
-        cantProyectos.add(proyectos);
+    public boolean addProyecto(Proyecto proyecto){
+        if(Proyectos.isEmpty()){
+            Proyectos.add(proyecto);
+            return true;
+        }else if(Proyectos.size() < 2){
+            Proyectos.add(proyecto);
+            return true;
+        }
+        return false;
+    }
+    
+    public Proyecto getProyecto(String nombre){
+        if(!Proyectos.isEmpty()){
+            for(Proyecto p: Proyectos){
+                if(p.getNombre().equals(nombre)){
+                    return p;
+                }
+            }
+        }
+        return null;
     }
     
 }
