@@ -12,59 +12,57 @@ import java.util.Date;
  * @author Ignacio Brenes
  */
 public class Tarea {
-    private String nombreTarea;
-    private int indentificador ;
-    private float duracion;
-    private float tiempo;   
+    private String nombre;
+    private String Descripcion;
+    private int indentificador = 0;
+    private double duracion;
     private Date fechaEntrega;
-    private boolean terminada;
+    private boolean estado;
+
+    public Tarea(String nombre, String Descripcion, Date fechaEntrega) {
+        this.nombre = nombre;
+        this.Descripcion = Descripcion;
+        this.fechaEntrega = fechaEntrega;
+        this.indentificador++;
+        this.duracion = 0;
+        this.estado = false;
+    }
     
-
-    public Tarea(String nombreTarea, int indentificador, float duracion, float tiempo) {
-        this.nombreTarea = nombreTarea;
-        this.indentificador = indentificador;
-        this.duracion = duracion;
-        this.tiempo = tiempo;
+    //Getters
+    public String getNombre() {
+        return nombre;
     }
 
-    public String getNombreTarea() {
-        return nombreTarea;
-    }
-
-    public void setNombreTarea(String nombreTarea) {
-        this.nombreTarea = nombreTarea;
+    public String getDescripcion() {
+        return Descripcion;
     }
 
     public int getIndentificador() {
         return indentificador;
     }
 
-    public void setIndentificador(int indentificador) {
-        this.indentificador = indentificador;
-    }
-
-    public float getDuracion() {
+    public double getDuracion() {
         return duracion;
     }
 
-    public void setDuracion(float duracion) {
-        this.duracion = duracion;
+    public Date getFechaEntrega() {
+        return fechaEntrega;
     }
 
-    public float getTiempo() {
-        return tiempo;
-    }
-
-    public void setTiempo(float tiempo) {
-        this.tiempo = tiempo;
-    }
-   
-    public boolean estaTerminada(){
-        return terminada;
+    public boolean isEstado() {
+        return estado;
     }
     
-    public void setTerminada(boolean ter){
-        this.terminada = ter;
+    //Setters
+
+    public void addDuracion(double duracion) {
+        this.duracion += duracion;
     }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
+
     
 }

@@ -19,19 +19,20 @@ public class Proyecto {
     private Date fechaInicio;
     private ArrayList<Tarea> tareas;
     private Jefe jefe;
-    public Departamento departamento;
+    public ArrayList<Departamento> departamentos;
     public ArrayList<Empleado> empleados;
     public ArrayList<Recursos> recursos;
 
     public Proyecto(String nombre, Date fechaInicio, Departamento depa) {
         this.nombre = nombre;
         this.fechaInicio = fechaInicio;
-        this.departamento = depa;
+        this.departamentos.add(depa);
         this.empleados = new ArrayList<>();
         this.recursos = new ArrayList<>();
         this.tareas = new ArrayList<>();
     }
     
+    //Empleado
     public boolean anadirEmpleado(Empleado e){
         if(empleados.contains(e)){
             return false;
@@ -40,6 +41,7 @@ public class Proyecto {
         return true;
     }
     
+    //Tareas
     public boolean anadirTarea(Tarea t){
         if(tareas.contains(t)){
             return false;
@@ -48,6 +50,7 @@ public class Proyecto {
         return true;
     }
     
+    //Recursos
     public boolean anadirRecurso(Recursos r){
         if(recursos.contains(r)){
             return false;
@@ -56,6 +59,7 @@ public class Proyecto {
         return true;
     }
     
+    //Getters
     public Tarea getTarea(int id){
         if(!tareas.isEmpty()){
             for(Tarea t: tareas){
@@ -102,8 +106,8 @@ public class Proyecto {
         return jefe;
     }
 
-    public Departamento getDepartamento() {
-        return departamento;
+    public ArrayList<Departamento> getDepartamento() {
+        return departamentos;
     }
 
     public ArrayList<Empleado> getEmpleados() {
@@ -114,6 +118,7 @@ public class Proyecto {
         return recursos;
     }
 
+    //Setters       
     public void setPresupuesto(double presupuesto) {
         this.presupuesto = presupuesto;
     }

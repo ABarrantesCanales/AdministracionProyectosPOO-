@@ -23,6 +23,20 @@ public class Empleado {
         this.nombreEmpleado = nombreEmpleado;
         this.ced = ced;
     }
+    
+    public void addProyecto(Proyecto p){
+        proyectos.add(p);
+    }
+    
+    public Proyecto buscarProyecto(Proyecto p){
+        if(proyectos.isEmpty()){
+            return null;
+        }
+        if(proyectos.contains(p)){
+            return p;
+        }
+        return null;
+    }
 
     public double getSalario() {
         return salario;

@@ -10,41 +10,27 @@ package utilidades;
  * @author Ignacio Brenes
  */
 public class Recursos {
+    private String nombre;
+    private boolean estado;
+    private boolean proyecto;
+
+    public Recursos(String nombre){
+        this.nombre = nombre;
+        this.estado = false;
+    }
+
+    //Getters
+    public String getNombre() {
+        return nombre;
+    }
+
+    public boolean getEstado() {
+        return estado;
+    }
+
+    public boolean getProyecto() {
+        return proyecto;
+    }
     
-    private String materiales;
-    private String empresa;
-    private String persona;
-    public Empresa empresas;
-    public Proyecto proyecto;
-
-    public Recursos(String materiales, String empresa, String persona) {
-        this.materiales = materiales;
-        this.empresa = empresa;
-        this.persona = persona;
-    }
-
-    public String getMateriales() {
-        return materiales;
-    }
-
-    public void setMateriales(String materiales) {
-        this.materiales = materiales;
-    }
-
-    public String getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(String empresa) {
-        this.empresa = empresa;
-    }
-
-    public String getPersona() {
-        return persona;
-    }
-
-    public void setPersona(String persona) {
-        this.persona = persona;
-    }
     
 }

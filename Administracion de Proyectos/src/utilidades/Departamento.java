@@ -16,7 +16,6 @@ public class Departamento {
     private String nombreDepartamento;
     private double presupuesto;
     private float cargaTrabajo;
-    public Proyecto proyecto;
 
     public Departamento(ArrayList<Proyecto> proyectos, String nombreDepartamento, float presupuesto, float cargaTrabajo) {
         this.proyectos = proyectos;
@@ -29,8 +28,8 @@ public class Departamento {
         return proyectos;
     }
 
-    public void setProyectos(ArrayList<Proyecto> proyectos) {
-        this.proyectos = proyectos;
+    public void addProyecto(Proyecto p){
+        proyectos.add(p);
     }
 
     public String getNombreDepartamento() {

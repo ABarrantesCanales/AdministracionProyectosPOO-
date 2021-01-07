@@ -14,16 +14,16 @@ import java.util.ArrayList;
  */
 public class Empresa implements Serializable{
     private String nombre;
-    private ArrayList <Proyecto> listProyecto;
-    private ArrayList <Departamento> departamentos;
-    private ArrayList<Empleado> listaEmpleados;
     private int cedulaJuridica;
-    public Recursos recursos;
-    public Departamento departamento;
+    private ArrayList<Recursos> listaRecursos;
+    private ArrayList <Proyecto> listaProyectos;
+    private ArrayList <Departamento> listaDepartamentos;
+    private ArrayList<Empleado> listaEmpleados;
     public static Empresa singletonObj;
     
     /*
-    Se declara la empresa como un objeto singleton para asi tener acceso a sus datos en todas las clases
+    Se aplica el patron de disegno Singleton para asi tener acceso a los datos de 
+    la empresa en todas las clases.
     */
     public static synchronized Empresa getProyecto(){
         if(singletonObj == null){
@@ -32,71 +32,106 @@ public class Empresa implements Serializable{
         return singletonObj;
     }
     
-    public void setData(String nombre, ArrayList<Proyecto> listProyecto, int cedulaJuridica, ArrayList<Departamento> departamentos){
+    public void setData(String nombre, ArrayList<Proyecto> listProyecto, int cedulaJuridica){
         this.nombre = nombre;
-        this.listProyecto = listProyecto;
+        this.listaProyectos = listProyecto;
         this.cedulaJuridica = cedulaJuridica;
-        this.departamentos = departamentos;
+        this.listaDepartamentos = new ArrayList<>();
         this.listaEmpleados = new ArrayList<>();
+        this.listaProyectos = new ArrayList<>();
+        this.listaRecursos = new ArrayList<>();
+        
     }
     
-    
-//
-//    public Empresa(String nombre, ArrayList<Proyecto> listProyecto, int cedulaJuridica, ArrayList<Departamento> departamentos) {
-//        this.nombre = nombre;
-//        this.listProyecto = listProyecto;
-//        this.cedulaJuridica = cedulaJuridica;
-//        this.departamentos = departamentos;
-//    }
-    
-    public void addEmpleado(Empleado e){
-        listaEmpleados.add(e);
+    //Empleados
+    public void addEmpleado(Empleado em){
+        listaEmpleados.add(em);
     }
     
-    public ArrayList<Empleado> getEmpleados(){
-        return listaEmpleados;
-    }
-    
-    public Empleado buscarEmpleado(Empleado e){
+    public Empleado buscarEmpleado(Empleado em){
         if(listaEmpleados.isEmpty()){
             return null;
         }
-        if(listaEmpleados.contains(e)){
-            return e;
+        if(listaEmpleados.contains(em)){
+            return em;
         }
         return null;
     }
+
+    //Departamentos
+    public void addDepartamento(Empleado dep){
+        listaEmpleados.add(dep);
+    }
+    
+    public Departamento buscarDepartamento(Departamento dep){
+        if(listaDepartamentos.isEmpty()){
+            return null;
+        }
+        if(listaDepartamentos.contains(dep)){
+            return dep;
+        }
+        return null;
+    }
+    //Proyectos
+    public void addProyecto(Proyecto p){
+        listaProyectos.add(p);
+    }
+    
+    public Proyecto buscarProyecto(Proyecto p){
+        if(listaProyectos.isEmpty()){
+            return null;
+        }
+        if(listaProyectos.contains(p)){
+            return p;
+        }
+        return null;
+    }
+    
+    //Recursos
+    public void addRecurso(Recursos r){
+        listaRecursos.add(r);
+    }
+    
+    public Recursos buscarRecurso(Recursos r){
+        if(listaRecursos.isEmpty()){
+            return null;
+        }
+        if(listaRecursos.contains(r)){
+            return r;
+        }
+        return null;
+    }
+    
+    //Getters
 
     public String getNombre() {
         return nombre;
     }
 
+    public ArrayList<Recursos> getListaRecursos() {
+        return listaRecursos;
+    }
+
+    public ArrayList<Proyecto> getListaProyectos() {
+        return listaProyectos;
+    }
+
+    public ArrayList<Departamento> getListaDepartamentos() {
+        return listaDepartamentos;
+    }
+
+    public ArrayList<Empleado> getListaEmpleados() {
+        return listaEmpleados;
+    }
+    
+    //Setters
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public ArrayList<Proyecto> getListProyecto() {
-        return listProyecto;
-    }
-
-    public void setListProyecto(ArrayList<Proyecto> listProyecto) {
-        this.listProyecto = listProyecto;
-    }
-
-    public int getCedulaJuridica() {
-        return cedulaJuridica;
-    }
-
     public void setCedulaJuridica(int cedulaJuridica) {
         this.cedulaJuridica = cedulaJuridica;
-    }
-
-    public ArrayList<Departamento> getDepartamentos() {
-        return departamentos;
-    }
-
-    public void setDepartamentos(ArrayList<Departamento> departamentos) {
-        this.departamentos = departamentos;
     }
     
 }
