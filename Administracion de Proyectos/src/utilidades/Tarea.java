@@ -5,6 +5,7 @@
  */
 package utilidades;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -16,16 +17,28 @@ public class Tarea {
     private String Descripcion;
     private int indentificador = 0;
     private double duracion;
+    private double horasRequeridas;
     private Date fechaEntrega;
     private boolean estado;
+    private boolean requerimientos;
+    private ArrayList<Tarea> listaRequerimientos;
 
-    public Tarea(String nombre, String Descripcion, Date fechaEntrega) {
+    public Tarea(String nombre, String Descripcion, Date fechaEntrega, double duracion, double horasR, boolean requerimientos) {
         this.nombre = nombre;
         this.Descripcion = Descripcion;
         this.fechaEntrega = fechaEntrega;
         this.indentificador++;
-        this.duracion = 0;
+        this.duracion = duracion;
+        this.horasRequeridas = horasR;
         this.estado = false;
+        this.requerimientos = requerimientos;
+        if(requerimientos){
+            this.listaRequerimientos = new ArrayList<>();
+        }
+    }
+    
+    public void addRequerimiento(Tarea t){
+        this.listaRequerimientos.add(t);
     }
     
     //Getters
@@ -49,20 +62,17 @@ public class Tarea {
         return fechaEntrega;
     }
 
-    public boolean isEstado() {
+    public boolean getEstado() {
         return estado;
     }
     
-    //Setters
-
-    public void addDuracion(double duracion) {
-        this.duracion += duracion;
+    public ArrayList<Tarea> getRequerimientos(){
+        return listaRequerimientos; 
     }
-
+    
+    //Setters
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-    
-
     
 }
