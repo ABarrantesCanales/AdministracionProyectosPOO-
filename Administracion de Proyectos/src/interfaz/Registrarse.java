@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package utilidades;
+package interfaz;
 
 import javax.swing.JOptionPane;
 
@@ -116,7 +116,7 @@ public class Registrarse extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       Inicio abrir=new  Inicio();
+       inicioSesion abrir=new  inicioSesion();
        abrir.setVisible(true);
        this.setVisible(false);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed

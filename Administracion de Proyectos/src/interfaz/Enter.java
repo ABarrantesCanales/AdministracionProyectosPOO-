@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package utilidades;
+package interfaz;
 
 /**
  *
@@ -86,7 +86,7 @@ public class Enter extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       ReporteEconomico abrir=new  ReporteEconomico();
+       inicio abrir=new  inicio();
        abrir.setVisible(true);
        this.setVisible(false); 
     }//GEN-LAST:event_jButton2ActionPerformed
