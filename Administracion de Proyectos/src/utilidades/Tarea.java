@@ -14,8 +14,7 @@ import java.util.Date;
  */
 public class Tarea {
     private String nombre;
-    private String Descripcion;
-    private int indentificador = 0;
+    private int indentificador;
     private double duracion;
     private double horasRequeridas;
     private Date fechaEntrega;
@@ -23,14 +22,14 @@ public class Tarea {
     private boolean requerimientos;
     private ArrayList<Tarea> listaRequerimientos;
 
-    public Tarea(String nombre, String Descripcion, Date fechaEntrega, double duracion, double horasR, boolean requerimientos) {
+    public Tarea(String nombre, Date fechaEntrega, double duracion, double horasR, boolean requerimientos, int id) {
         this.nombre = nombre;
-        this.Descripcion = Descripcion;
         this.fechaEntrega = fechaEntrega;
         this.indentificador++;
         this.duracion = duracion;
         this.horasRequeridas = horasR;
         this.estado = false;
+        this.indentificador = id;
         this.requerimientos = requerimientos;
         if(requerimientos){
             this.listaRequerimientos = new ArrayList<>();
@@ -44,10 +43,6 @@ public class Tarea {
     //Getters
     public String getNombre() {
         return nombre;
-    }
-
-    public String getDescripcion() {
-        return Descripcion;
     }
 
     public int getIndentificador() {
@@ -73,6 +68,10 @@ public class Tarea {
     //Setters
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+    
+    public void setRequerimientos(ArrayList<Tarea> requerimientos){
+        this.listaRequerimientos = requerimientos;
     }
     
 }

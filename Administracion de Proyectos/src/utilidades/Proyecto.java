@@ -19,6 +19,7 @@ public class Proyecto {
     private Date fechaInicio;
     private ArrayList<Tarea> tareas;
     private Jefe jefe;
+    public int identificador = 0;
     public ArrayList<Departamento> departamentos;
     public ArrayList<Empleado> empleados;
     public ArrayList<Recursos> recursos;
