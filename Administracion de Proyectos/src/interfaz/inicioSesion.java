@@ -120,16 +120,12 @@ public class inicioSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
-        Enter abrir=new  Enter();
-       abrir.setVisible(true);
-       this.setVisible(false);
+        
     }//GEN-LAST:event_btnInicioActionPerformed
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
-       Registrarse abrir=new  Registrarse();
-       abrir.setVisible(true);
-       this.setVisible(false);
-       
+      
+ 
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     /**

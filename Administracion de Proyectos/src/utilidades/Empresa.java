@@ -19,17 +19,17 @@ public class Empresa implements Serializable{
     private ArrayList <Proyecto> listaProyectos;
     private ArrayList <Departamento> listaDepartamentos;
     private ArrayList<Empleado> listaEmpleados;
-    public static Empresa singletonObj;
+    public static Empresa instancia;
     
     /*
     Se aplica el patron de disegno Singleton para asi tener acceso a los datos de 
     la empresa en todas las clases.
     */
-    public static synchronized Empresa getProyecto(){
-        if(singletonObj == null){
-            singletonObj = new Empresa();
+    public static Empresa getInstance(){
+        if(instancia == null){
+            instancia = new Empresa();
         }
-        return singletonObj;
+        return instancia;
     }
     
     public void setData(String nombre, ArrayList<Proyecto> listProyecto, int cedulaJuridica){

@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Ignacio Brenes
  */
-public class Jefe extends Empleado{
+public class Jefe extends Persona{
     private ArrayList<Proyecto> Proyectos;
     private boolean check;
     private String usuario;
@@ -28,12 +28,12 @@ public class Jefe extends Empleado{
     }
     
     //Constructor usado para jefe de la empresa, que puede ver diferentes reportes y datos
-    public Jefe(double salario, String nombreEmpleado, int ced, String usuario, String contra, boolean check) {
-        super(salario, nombreEmpleado, ced);
-        this.check = check;
-        this.usuario = usuario;
-        this.contrasegna = contra;
-    }
+//    public Jefe(double salario, String nombreEmpleado, int ced, String usuario, String contra, boolean check) {
+//        super(salario, nombreEmpleado, ced);
+//        this.check = check;
+//        this.usuario = usuario;
+//        this.contrasegna = contra;
+//    }
         
     public ArrayList<Proyecto> getProyectos() {
         return Proyectos;

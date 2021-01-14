@@ -11,26 +11,14 @@ import java.util.ArrayList;
  *
  * @author Ignacio Brenes
  */
-public class Empleado {
-    
-    private double salario;
-    private String nombreEmpleado;
-    private int ced;
+public class Empleado extends Persona{
     private ArrayList<Proyecto> proyectos;
     private ArrayList<Tarea> tareas;
     private Departamento departamento;
 
-    //Constructor usado para la clase jefe
-    public Empleado(double salario, String nombreEmpleado, int ced) {
-        this.salario = salario;
-        this.nombreEmpleado = nombreEmpleado;
-        this.ced = ced;
-    }    
     
     public Empleado(double salario, String nombreEmpleado, int ced, Departamento depa) {
-        this.salario = salario;
-        this.nombreEmpleado = nombreEmpleado;
-        this.ced = ced;
+        super(salario, nombreEmpleado, ced);
         this.departamento = depa;
         depa.addEmpleado(this);
     }
@@ -51,18 +39,6 @@ public class Empleado {
 
     //Getters
 
-    public double getSalario() {
-        return salario;
-    }
-
-    public String getNombreEmpleado() {
-        return nombreEmpleado;
-    }
-
-    public int getCed() {
-        return ced;
-    }
-
     public ArrayList<Proyecto> getProyectos() {
         return proyectos;
     }
@@ -72,19 +48,6 @@ public class Empleado {
     }
     
     //Setters
-
-    public void setSalario(double salario) {
-        this.salario = salario;
-    }
-
-    public void setNombreEmpleado(String nombreEmpleado) {
-        this.nombreEmpleado = nombreEmpleado;
-    }
-
-    public void setCed(int ced) {
-        this.ced = ced;
-    }
-
     public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
     }
