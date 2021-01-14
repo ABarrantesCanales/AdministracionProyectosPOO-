@@ -26,7 +26,7 @@ public abstract class Persona {
         return salario;
     }
 
-    public String getNombreEmpleado() {
+    public String getNombre() {
         return nombreEmpleado;
     }
 
@@ -38,7 +38,7 @@ public abstract class Persona {
         this.salario = salario;
     }
 
-    public void setNombreEmpleado(String nombreEmpleado) {
+    public void setNombre(String nombreEmpleado) {
         this.nombreEmpleado = nombreEmpleado;
     }
 

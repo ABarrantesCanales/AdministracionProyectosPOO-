@@ -5,6 +5,7 @@
  */
 package utilidades;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -20,14 +21,16 @@ public class Proyecto {
     private ArrayList<Tarea> tareas;
     private Jefe jefe;
     public int identificador = 0;
-    public ArrayList<Departamento> departamentos;
-    public ArrayList<Empleado> empleados;
-    public ArrayList<Recursos> recursos;
+    private Departamento depaPrincipal;
+    private ArrayList<Departamento> departamentos;
+    private ArrayList<Empleado> empleados;
+    private ArrayList<Recursos> recursos;
 
     public Proyecto(String nombre, Date fechaInicio, Departamento depa) {
         this.nombre = nombre;
         this.fechaInicio = fechaInicio;
-        this.departamentos.add(depa);
+        this.departamentos = new ArrayList<>();
+        this.depaPrincipal = depa;
         this.empleados = new ArrayList<>();
         this.recursos = new ArrayList<>();
         this.tareas = new ArrayList<>();
@@ -51,12 +54,30 @@ public class Proyecto {
         return true;
     }
     
+    public boolean tareasAtrasadas(){
+        for(Tarea t: tareas){
+            if(t.getFechaEntrega().compareTo(new Date()) <= 0 && t.getEstado() == false){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     //Recursos
     public boolean anadirRecurso(Recursos r){
         if(recursos.contains(r)){
             return false;
         }
         recursos.add(r);
+        return true;
+    }
+    
+    //Departamentos
+    public boolean anadirDepartamento(Departamento d){
+        if(departamentos.contains(d)){
+            return false;
+        }
+        departamentos.add(d);
         return true;
     }
     
@@ -106,8 +127,12 @@ public class Proyecto {
     public Jefe getJefe() {
         return jefe;
     }
+    
+    public Departamento getDepaPrincipal(){
+        return depaPrincipal;
+    }
 
-    public ArrayList<Departamento> getDepartamento() {
+    public ArrayList<Departamento> getDepartamentos() {
         return departamentos;
     }
 

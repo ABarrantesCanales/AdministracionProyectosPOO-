@@ -156,13 +156,13 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="btnListarProyectos" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="btnCostoProyectoPersonal4" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnPersonalDepa" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Component id="btnProyectosAtraso" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="btnCostoProyectoPersonal2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnRecursosLibres" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="btnPersonalConProyecto" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
@@ -187,13 +187,13 @@
                       <EmptySpace pref="14" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnListarProyectos" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnCostoProyectoPersonal4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnPersonalDepa" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnProyectosAtraso" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnPersonalConProyecto" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnCostoProyectoPersonal2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnRecursosLibres" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -214,7 +214,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JList" name="jList2">
+                <Component class="javax.swing.JList" name="jListados">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Dialog" size="14" style="0"/>
@@ -236,6 +236,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Listar proyectos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnListarProyectosActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnPersonalConProyecto">
               <Properties>
@@ -244,6 +247,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Personal con proyectos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPersonalConProyectoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnProyectosAtraso">
               <Properties>
@@ -272,21 +278,27 @@
                 <Property name="text" type="java.lang.String" value="Costo proyectos (solo personal)"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnCostoProyectoPersonal2">
+            <Component class="javax.swing.JButton" name="btnRecursosLibres">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="14" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Recursos libres"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRecursosLibresActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnCostoProyectoPersonal4">
+            <Component class="javax.swing.JButton" name="btnPersonalDepa">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="14" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Personal por departamento"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPersonalDepaActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

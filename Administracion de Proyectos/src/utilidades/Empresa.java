@@ -16,10 +16,11 @@ public class Empresa implements Serializable{
     private String nombre;
     private int cedulaJuridica;
     private ArrayList<Recursos> listaRecursos;
-    private ArrayList <Proyecto> listaProyectos;
-    private ArrayList <Departamento> listaDepartamentos;
+    private ArrayList<Proyecto> listaProyectos;
+    private ArrayList<Departamento> listaDepartamentos;
     private ArrayList<Empleado> listaEmpleados;
-    public static Empresa instancia;
+    private ArrayList<Jefe> listaJefes;
+    private static Empresa instancia;
     
     /*
     Se aplica el patron de disegno Singleton para asi tener acceso a los datos de 
@@ -40,12 +41,17 @@ public class Empresa implements Serializable{
         this.listaEmpleados = new ArrayList<>();
         this.listaProyectos = new ArrayList<>();
         this.listaRecursos = new ArrayList<>();
+        this.listaJefes = new ArrayList<>();
         
     }
     
     //Empleados
     public void addEmpleado(Empleado em){
         listaEmpleados.add(em);
+    }
+    
+    public void addJefe(Jefe j){
+        listaJefes.add(j);
     }
     
     public Empleado buscarEmpleado(Empleado em){
@@ -122,6 +128,10 @@ public class Empresa implements Serializable{
 
     public ArrayList<Empleado> getListaEmpleados() {
         return listaEmpleados;
+    }
+    
+    public ArrayList<Jefe> getListaJefes(){
+        return listaJefes;
     }
     
     //Setters

@@ -5,6 +5,15 @@
  */
 package interfaz;
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import utilidades.Departamento;
+import utilidades.Empleado;
+import utilidades.Empresa;
+import utilidades.Jefe;
+import utilidades.Proyecto;
+import utilidades.Recursos;
+
 /**
  *
  * @author josue
@@ -41,14 +50,14 @@ public class inicio extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        jListados = new javax.swing.JList<>();
         btnListarProyectos = new javax.swing.JButton();
         btnPersonalConProyecto = new javax.swing.JButton();
         btnProyectosAtraso = new javax.swing.JButton();
         btnCostoProyecto = new javax.swing.JButton();
         btnCostoProyectoPersonal = new javax.swing.JButton();
-        btnCostoProyectoPersonal2 = new javax.swing.JButton();
-        btnCostoProyectoPersonal4 = new javax.swing.JButton();
+        btnRecursosLibres = new javax.swing.JButton();
+        btnPersonalDepa = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jComboBox2 = new javax.swing.JComboBox<>();
@@ -101,14 +110,24 @@ public class inicio extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
         jLabel1.setText("Manejo de empresa");
 
-        jList2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jScrollPane2.setViewportView(jList2);
+        jListados.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jScrollPane2.setViewportView(jListados);
 
         btnListarProyectos.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btnListarProyectos.setText("Listar proyectos");
+        btnListarProyectos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarProyectosActionPerformed(evt);
+            }
+        });
 
         btnPersonalConProyecto.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btnPersonalConProyecto.setText("Personal con proyectos");
+        btnPersonalConProyecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPersonalConProyectoActionPerformed(evt);
+            }
+        });
 
         btnProyectosAtraso.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btnProyectosAtraso.setText("Proyectos con atraso");
@@ -124,11 +143,21 @@ public class inicio extends javax.swing.JFrame {
         btnCostoProyectoPersonal.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btnCostoProyectoPersonal.setText("Costo proyectos (solo personal)");
 
-        btnCostoProyectoPersonal2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        btnCostoProyectoPersonal2.setText("Recursos libres");
+        btnRecursosLibres.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnRecursosLibres.setText("Recursos libres");
+        btnRecursosLibres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecursosLibresActionPerformed(evt);
+            }
+        });
 
-        btnCostoProyectoPersonal4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        btnCostoProyectoPersonal4.setText("Personal por departamento");
+        btnPersonalDepa.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnPersonalDepa.setText("Personal por departamento");
+        btnPersonalDepa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPersonalDepaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -143,12 +172,12 @@ public class inicio extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnListarProyectos)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnCostoProyectoPersonal4))
+                                .addComponent(btnPersonalDepa))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(btnProyectosAtraso)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnCostoProyectoPersonal2)
+                                    .addComponent(btnRecursosLibres)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(btnPersonalConProyecto)
                                     .addGap(7, 7, 7))
@@ -165,12 +194,12 @@ public class inicio extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnListarProyectos)
-                    .addComponent(btnCostoProyectoPersonal4))
+                    .addComponent(btnPersonalDepa))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnProyectosAtraso)
                     .addComponent(btnPersonalConProyecto)
-                    .addComponent(btnCostoProyectoPersonal2))
+                    .addComponent(btnRecursosLibres))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCostoProyecto)
@@ -364,14 +393,87 @@ public class inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnProyectosAtrasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProyectosAtrasoActionPerformed
-        // TODO add your handling code here:
+        ArrayList<Proyecto> proyectos = Empresa.getInstance().getListaProyectos();
+        DefaultListModel model = new DefaultListModel();    
+        for(Proyecto p: proyectos){
+            if(p.tareasAtrasadas()){
+                model.addElement(p.getNombre());
+            }
+        }
+        jListados.setModel(model);
     }//GEN-LAST:event_btnProyectosAtrasoActionPerformed
 
     private void jTextField16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField16ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField16ActionPerformed
 
+    private void btnListarProyectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarProyectosActionPerformed
+        ArrayList<Proyecto> proyectos = Empresa.getInstance().getListaProyectos();
+        DefaultListModel model = new DefaultListModel();    
+        model.addElement("Nombre de Proyecto: \t" + "Departamento(s) al que pertenece:");
+        for(Proyecto p: proyectos){
+            model.addElement(p.getNombre());
+            if(!p.getDepartamentos().isEmpty()){
+                for(Departamento d: p.getDepartamentos()){
+                    model.addElement("\t\t" + d.getNombreDepartamento());
+                }
+                model.addElement("\t\t" + p.getDepaPrincipal());
+            }else{
+                model.addElement("\t\t" + p.getDepaPrincipal());
+            }
+        }
+        jListados.setModel(model);
+    }//GEN-LAST:event_btnListarProyectosActionPerformed
+
+    private void btnPersonalDepaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalDepaActionPerformed
+        ArrayList<Departamento> depas = Empresa.getInstance().getListaDepartamentos();
+        DefaultListModel model = new DefaultListModel();
+        for(Departamento d: depas){
+            model.addElement(d.getNombreDepartamento());
+            for(Empleado e: d.getEmpleados()){
+                model.addElement("\t" + e.getNombre() + ":");
+                if(!e.getProyectos().isEmpty()){
+                    for(Proyecto p: e.getProyectos()){
+                       if(p.getDepaPrincipal() == d){
+                           model.addElement("\t\t" + "Trabaja en " + p.getNombre() + " que es propio.");
+                       }
+                       model.addElement("\t\t" + "Trabaja en " + p.getNombre() + " que pertenece al " + p.getDepaPrincipal().getNombreDepartamento());
+                    }
+                }else{
+                    model.addElement("No tiene proyectos asignados.");
+                }
+            }
+        }
+        jListados.setModel(model);
+    }//GEN-LAST:event_btnPersonalDepaActionPerformed
+
+    private void btnRecursosLibresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecursosLibresActionPerformed
+        ArrayList<Recursos> recursos = Empresa.getInstance().getListaRecursos();
+        DefaultListModel model = new DefaultListModel();
+        for(Recursos r: recursos){
+            if(r.getEstado() == false){
+                model.addElement(r.getNombre());
+            }
+        }
+        jListados.setModel(model);
+    }//GEN-LAST:event_btnRecursosLibresActionPerformed
+
+    private void btnPersonalConProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalConProyectoActionPerformed
+        ArrayList<Jefe> jefes = Empresa.getInstance().getListaJefes();
+        DefaultListModel model = new DefaultListModel();
+        for(Jefe j: jefes){
+            if(!j.getProyectos().isEmpty()){
+                model.addElement(j.getNombre() + ":");
+                for(Proyecto p: j.getProyectos()){
+                    model.addElement("\t\t" + p.getNombre());
+                }
+            }
+        }
+        jListados.setModel(model);
+    }//GEN-LAST:event_btnPersonalConProyectoActionPerformed
+
     /**
+     * 
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -411,12 +513,12 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JButton btnCostoProyecto;
     private javax.swing.JButton btnCostoProyectoPersonal;
     private javax.swing.JButton btnCostoProyectoPersonal1;
-    private javax.swing.JButton btnCostoProyectoPersonal2;
     private javax.swing.JButton btnCostoProyectoPersonal3;
-    private javax.swing.JButton btnCostoProyectoPersonal4;
     private javax.swing.JButton btnListarProyectos;
     private javax.swing.JButton btnPersonalConProyecto;
+    private javax.swing.JButton btnPersonalDepa;
     private javax.swing.JButton btnProyectosAtraso;
+    private javax.swing.JButton btnRecursosLibres;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -435,7 +537,7 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList2;
+    private javax.swing.JList<String> jListados;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
