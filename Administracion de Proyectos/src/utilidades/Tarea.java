@@ -21,6 +21,7 @@ public class Tarea {
     private boolean estado;
     private boolean requerimientos;
     private ArrayList<Tarea> listaRequerimientos;
+    private ArrayList<Empleado> Responsables;
 
     public Tarea(String nombre, Date fechaEntrega, double duracion, double horasR, boolean requerimientos, int id) {
         this.nombre = nombre;

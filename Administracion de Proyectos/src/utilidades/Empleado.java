@@ -17,6 +17,7 @@ public class Empleado {
     private String nombreEmpleado;
     private int ced;
     private ArrayList<Proyecto> proyectos;
+    private ArrayList<Tarea> tareas;
     private Departamento departamento;
 
     //Constructor usado para la clase jefe
