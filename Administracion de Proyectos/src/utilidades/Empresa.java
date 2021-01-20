@@ -47,7 +47,7 @@ public class Empresa implements Serializable{
     
     //Empleados
     public boolean addEmpleado(Empleado em){
-        if(buscarEmpleado(em.getNombre()) == null){
+        if(buscarEmpleado(em.getCed()) == null){
             listaEmpleados.add(em);
             return true;
         }
@@ -58,12 +58,24 @@ public class Empresa implements Serializable{
         listaJefes.add(j);
     }
     
-    public Empleado buscarEmpleado(String em){
+    public Empleado buscarEmpleado(int id){
         if(listaEmpleados.isEmpty()){
             return null;
         }
         for(Empleado e: listaEmpleados){
-            if(e.getNombre().equals(em)){
+            if(e.getCed() == id){
+                return e;
+            }
+        }
+        return null;
+    }
+    
+    public Empleado buscarEmpleadoNombre(String name){
+        if(listaEmpleados.isEmpty()){
+            return null;
+        }
+        for(Empleado e: listaEmpleados){
+            if(e.getNombre().equals(name)){
                 return e;
             }
         }

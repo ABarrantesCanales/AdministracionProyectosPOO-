@@ -51,6 +51,7 @@ public class Proyecto {
             return false;
         }
         tareas.add(t);
+        identificador++;
         return true;
     }
     
@@ -126,6 +127,10 @@ public class Proyecto {
 
     public Jefe getJefe() {
         return jefe;
+    }
+    
+    public int getIdentificador(){
+        return identificador;
     }
     
     public Departamento getDepaPrincipal(){

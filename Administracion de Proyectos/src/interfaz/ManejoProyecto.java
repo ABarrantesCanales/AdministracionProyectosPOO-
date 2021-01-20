@@ -5,19 +5,64 @@
  */
 package interfaz;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
+import utilidades.Empleado;
+import utilidades.Empresa;
+import utilidades.Proyecto;
+import utilidades.Tarea;
+
 /**
  *
  * @author josue
  */
 public class ManejoProyecto extends javax.swing.JFrame {
-
+    
+    ArrayList<Tarea> requerimientos = new ArrayList<>();
+    Proyecto proyectoActual;
+    ArrayList<Empleado> responsables = new ArrayList<>();
+    
     /**
      * Creates new form Reportes
      */
     public ManejoProyecto() {
         initComponents();
+        setLocationRelativeTo(null);
+        checkRequerimientos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                JCheckBox cb = (JCheckBox) ae.getSource();
+                if (cb.isSelected()) {
+                    txtRequerimiento.setEnabled(true);
+                    btnAgregar.setEnabled(true);
+                } else {
+                    txtRequerimiento.setEnabled(false);
+                    btnAgregar.setEnabled(false);
+                }
+            }
+        });
+        btnTareaCompletada.setVisible(false);
+        comboAcccion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                switch(comboAcccion.getSelectedItem().toString()){
+                    case "Asignar tarea":
+                        ocultarComponentes("Asignar");
+                        break;
+                    case "Completar tarea":
+                        ocultarComponentes("Completar");
+                        break;  
+                }
+            }});
+        setTareasJList();
+        setEmpleadosList();
+        
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,39 +78,39 @@ public class ManejoProyecto extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNombreTarea = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         checkRequerimientos = new javax.swing.JCheckBox();
-        jTextField3 = new javax.swing.JTextField();
+        txtRequerimiento = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
+        datePickerEntrega = new org.jdesktop.swingx.JXDatePicker();
         jLabel12 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        txtDias = new javax.swing.JTextField();
+        txtHoras = new javax.swing.JTextField();
+        btnCrear = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jListTareas = new javax.swing.JList<>();
         jPanel2 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboAcccion = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel18 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        comboTareas = new javax.swing.JComboBox<>();
+        labelResposable = new javax.swing.JLabel();
+        txtResponsable = new javax.swing.JTextField();
+        btnAnadirResponsable = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jListEmpleados = new javax.swing.JList<>();
+        btnAsignar = new javax.swing.JButton();
+        btnTareaCompletada = new javax.swing.JButton();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
-        jButton3 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        costosProyecto = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        textCostos = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -86,17 +131,13 @@ public class ManejoProyecto extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel1.setText("Nombre de la tarea:");
 
-        jTextField1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtNombreTarea.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtNombreTarea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtNombreTareaActionPerformed(evt);
             }
         });
 
@@ -111,13 +152,23 @@ public class ManejoProyecto extends javax.swing.JFrame {
             }
         });
 
-        jTextField3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtRequerimiento.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtRequerimiento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRequerimientoKeyTyped(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel10.setText("ID del requerimiento:");
 
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton1.setText("Agregar");
+        btnAgregar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel11.setText("Fecha de entrega:");
@@ -128,12 +179,30 @@ public class ManejoProyecto extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel14.setText("Horas Requeridas:");
 
-        jTextField4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtDias.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtDias.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDiasKeyTyped(evt);
+            }
+        });
 
-        jTextField5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtHoras.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtHoras.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtHorasKeyTyped(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton2.setText("Crear");
+        btnCrear.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnCrear.setText("Crear");
+        btnCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearActionPerformed(evt);
+            }
+        });
+
+        jListTareas.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jScrollPane4.setViewportView(jListTareas);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -142,39 +211,39 @@ public class ManejoProyecto extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1))
                     .addComponent(jLabel11)
                     .addComponent(jLabel12)
-                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(datePickerEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton2)
+                        .addComponent(btnCrear)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel14)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1)
+                    .addComponent(txtNombreTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtRequerimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAgregar))
                     .addComponent(jLabel8)
                     .addComponent(checkRequerimientos))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addGap(52, 52, 52)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNombreTarea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -183,28 +252,29 @@ public class ManejoProyecto extends javax.swing.JFrame {
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))
+                            .addComponent(txtRequerimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAgregar))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(datePickerEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
-                .addContainerGap(56, Short.MAX_VALUE))
+                        .addComponent(btnCrear)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Tareas", jPanel1);
 
-        jComboBox1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        comboAcccion.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        comboAcccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Asignar tarea", "Completar tarea" }));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel6.setText("Elija una accion:");
@@ -212,37 +282,47 @@ public class ManejoProyecto extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel17.setText("Elija una tarea:");
 
-        jComboBox2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        comboTareas.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
-        jLabel18.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel18.setText("<html>Añada su(s)<br>Responsable(s) por ID</html>");
+        labelResposable.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        labelResposable.setText("<html>Añada su(s)<br>Responsable(s) por ID</html>");
 
-        jTextField2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txtResponsable.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtResponsable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtResponsableActionPerformed(evt);
+            }
+        });
+        txtResponsable.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtResponsableKeyTyped(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton4.setText("Agregar");
-
-        jList1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jScrollPane2.setViewportView(jList1);
-
-        jButton5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton5.setText("Asignar Tarea");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnAnadirResponsable.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnAnadirResponsable.setText("Agregar");
+        btnAnadirResponsable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnAnadirResponsableActionPerformed(evt);
             }
         });
 
-        jButton6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton6.setText("Marcar Tarea como completada");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jListEmpleados.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jScrollPane2.setViewportView(jListEmpleados);
+
+        btnAsignar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnAsignar.setText("Asignar Tarea");
+        btnAsignar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnAsignarActionPerformed(evt);
+            }
+        });
+
+        btnTareaCompletada.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        btnTareaCompletada.setText("Marcar Tarea como completada");
+        btnTareaCompletada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTareaCompletadaActionPerformed(evt);
             }
         });
 
@@ -254,94 +334,93 @@ public class ManejoProyecto extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
-                        .addComponent(jButton6))
+                        .addComponent(btnTareaCompletada))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(28, 28, 28)
-                                .addComponent(jButton4))
+                                .addComponent(btnAnadirResponsable))
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField2)
-                                .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtResponsable)
+                                .addComponent(comboTareas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel17)
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(comboAcccion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel6)
-                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelResposable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jButton5)
+                                    .addComponent(btnAsignar)
                                     .addGap(8, 8, 8))))))
                 .addGap(11, 11, 11)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboAcccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboTareas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelResposable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtResponsable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)
+                        .addComponent(btnAnadirResponsable)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton5)
+                        .addComponent(btnAsignar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton6)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addComponent(btnTareaCompletada)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Manejo de tareas", jPanel2);
 
-        jList2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jScrollPane3.setViewportView(jList2);
-
-        jButton3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton3.setText("Costos de proyecto");
-
-        jButton8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton8.setText("Empleados por paga (Ascendiente)");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        costosProyecto.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        costosProyecto.setText("Costos de proyecto");
+        costosProyecto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                costosProyectoActionPerformed(evt);
             }
         });
+
+        textCostos.setEditable(false);
+        textCostos.setColumns(20);
+        textCostos.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        textCostos.setRows(5);
+        jScrollPane1.setViewportView(textCostos);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3)
-                .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jButton3)
-                .addGap(18, 18, 18)
-                .addComponent(jButton8)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addComponent(costosProyecto)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(costosProyecto)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -372,22 +451,21 @@ public class ManejoProyecto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(40, 40, 40)
                                 .addComponent(jLabel3))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel5))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel15)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel16))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel5))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel16)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -418,25 +496,209 @@ public class ManejoProyecto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_checkRequerimientosActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtNombreTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreTareaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtNombreTareaActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtResponsableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtResponsableActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtResponsableActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void btnAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarActionPerformed
+        if(!responsables.isEmpty()){
+            Tarea t = proyectoActual.getTarea(Integer.parseInt(comboTareas.getSelectedItem().toString()));
+            for(Empleado e: responsables){
+                e.addTarea(t);
+            }
+            txtResponsable.setText("");
+            responsables.clear();
+            JOptionPane.showMessageDialog(rootPane, "Tarea asignada.");
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "No se han asignado trabajadores.");
+        }
+    }//GEN-LAST:event_btnAsignarActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void btnTareaCompletadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTareaCompletadaActionPerformed
+        Tarea t = proyectoActual.getTarea(Integer.parseInt(comboTareas.getSelectedItem().toString()));
+        if(t != null){
+            t.setCompleta();
+        }
+    }//GEN-LAST:event_btnTareaCompletadaActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    private void setTareasJList(){
+        ArrayList<Tarea> tareas = proyectoActual.getTareas();
+        DefaultListModel model = new DefaultListModel();
+        if(!tareas.isEmpty()){
+            for(Tarea t: tareas){
+                if(t.getEstado() == false){
+                    model.addElement(t.getIndentificador() + " - " + t.getNombre());
+                }
+            }
+            jListTareas.setModel(model);
+        }else{
+            model.addElement("No hay tareas.");
+            jListTareas.setModel(model);
+        }
+    }
+    
+    private void setTareas(){
+        ArrayList<Tarea> tareas = new ArrayList<>();
+        for(Tarea t: proyectoActual.getTareas()){
+            if(t.getEstado() == false){
+                tareas.add(t);
+            }
+        }
+        if(!tareas.isEmpty()){
+            String[] arrayTareas = new String[tareas.size()];
+            for(int i = 0; i < tareas.size(); i++){
+                arrayTareas[i] = tareas.get(i).getNombre();
+            }
+            DefaultComboBoxModel model = new DefaultComboBoxModel(arrayTareas);
+            comboTareas.setModel(model);
+        }
+    }
+    
+    public void setEmpleadosList(){
+        ArrayList<Empleado> empleados = proyectoActual.getEmpleados();
+        DefaultListModel model = new DefaultListModel();
+        if(!empleados.isEmpty()){
+            for(Empleado e: empleados){
+                model.addElement(e.getCed() + " - " + e.getNombre());
+            }
+            jListEmpleados.setModel(model);
+        }else{
+            model.addElement("No hay Empleados");
+            jListEmpleados.setModel(model);
+        }
+       
+    }
+    
+    private void txtRequerimientoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRequerimientoKeyTyped
+        char validar=evt.getKeyChar();
+        if (Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
+            txtRequerimiento.setText("");
+        }
+    }//GEN-LAST:event_txtRequerimientoKeyTyped
+
+    private void txtDiasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiasKeyTyped
+        char validar=evt.getKeyChar();
+        if (Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
+            txtDias.setText("");
+        }
+    }//GEN-LAST:event_txtDiasKeyTyped
+
+    private void txtHorasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHorasKeyTyped
+        char validar=evt.getKeyChar();
+        if (Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
+            txtHoras.setText("");
+        }
+    }//GEN-LAST:event_txtHorasKeyTyped
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        int id = Integer.parseInt(txtRequerimiento.getText());
+        Tarea tarea = proyectoActual.getTarea(id);
+        if(requerimientos.contains(tarea)){
+            JOptionPane.showMessageDialog(rootPane, "Esta tarea ya esta registrada.");
+        }
+        if(tarea == null){
+            JOptionPane.showMessageDialog(rootPane, "Esta tarea no existe.");
+            txtRequerimiento.setText("");
+        }else{
+            requerimientos.add(tarea);
+            txtRequerimiento.setText("");
+        }
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    public void ocultarComponentes(String string){
+        switch(string){
+            case "Asignar":
+                labelResposable.setVisible(true);
+                txtResponsable.setVisible(true);
+                btnAnadirResponsable.setVisible(true);
+                btnAsignar.setVisible(true);
+                btnTareaCompletada.setVisible(false);
+                break;
+            case "Completar":
+                labelResposable.setVisible(false);
+                txtResponsable.setVisible(false);
+                btnAnadirResponsable.setVisible(false);
+                btnAsignar.setVisible(false);
+                btnTareaCompletada.setVisible(true);
+                break;  
+        }
+    }
+    
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+        Tarea tarea = new Tarea(txtNombreTarea.getText(), datePickerEntrega.getDate(),  Double.parseDouble(txtDias.getText()),
+        Double.parseDouble(txtHoras.getText()), checkRequerimientos.isSelected(), proyectoActual.getIdentificador(), proyectoActual);
+        if(checkRequerimientos.isSelected()){
+            tarea.setRequerimientos(requerimientos);
+        }
+        proyectoActual.anadirTarea(tarea);
+        JOptionPane.showMessageDialog(rootPane, "Tarea registrada.");
+        txtNombreTarea.setText("");
+        datePickerEntrega.setDate(null);
+        txtDias.setText("");
+        txtHoras.setText("");
+        checkRequerimientos.setSelected(false);
+        txtRequerimiento.setEnabled(false);
+        btnAgregar.setEnabled(false);
+        txtRequerimiento.setText("");
+        requerimientos.clear();
+        setTareasJList();
+    }//GEN-LAST:event_btnCrearActionPerformed
+
+    private void txtResponsableKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtResponsableKeyTyped
+        char validar=evt.getKeyChar();
+        
+        if (Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
+            txtResponsable.setText("");
+        }
+    }//GEN-LAST:event_txtResponsableKeyTyped
+
+    private void btnAnadirResponsableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirResponsableActionPerformed
+        Empleado e = Empresa.getInstance().buscarEmpleado(Integer.parseInt(txtResponsable.getText()));
+        if(e != null){
+            responsables.add(e);
+            JOptionPane.showMessageDialog(rootPane, "Responsable añadido.");
+            txtResponsable.setText("");
+            
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "No existe un usuario con ese id.");
+            txtResponsable.setText("");
+        }
+    }//GEN-LAST:event_btnAnadirResponsableActionPerformed
+
+    private void costosProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_costosProyectoActionPerformed
+        ArrayList<Tarea> tareas = proyectoActual.getTareas();
+        textCostos.setText("");
+        for(Tarea t: tareas){
+            double costo = 0;
+            double horasPorPersona = (t.getHorasRequeridas() * t.getDuracion()) / t.getResponsables().size() ;
+            if(!t.getResponsables().isEmpty()){
+                for(Empleado e: t.getResponsables()){
+                    costo += e.getSalario() * horasPorPersona;
+                }
+                textCostos.append(t.getNombre() + " tiene un costo de: " + costo + "\n");
+            }else{
+                textCostos.append("Error, esta tarea (" + t.getNombre() + ") no tiene responsables.");
+            }
+        }
+    }//GEN-LAST:event_costosProyectoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -477,17 +739,18 @@ public class ManejoProyecto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAnadirResponsable;
+    private javax.swing.JButton btnAsignar;
+    private javax.swing.JButton btnCrear;
+    private javax.swing.JButton btnTareaCompletada;
     private javax.swing.JCheckBox checkRequerimientos;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JComboBox<String> comboAcccion;
+    private javax.swing.JComboBox<String> comboTareas;
+    private javax.swing.JButton costosProyecto;
+    private org.jdesktop.swingx.JXDatePicker datePickerEntrega;
+    private javax.swing.Box.Filler filler2;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -497,7 +760,6 @@ public class ManejoProyecto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -506,21 +768,21 @@ public class ManejoProyecto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
+    private javax.swing.JList<String> jListEmpleados;
+    private javax.swing.JList<String> jListTareas;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
+    private javax.swing.JLabel labelResposable;
+    private javax.swing.JTextArea textCostos;
+    private javax.swing.JTextField txtDias;
+    private javax.swing.JTextField txtHoras;
+    private javax.swing.JTextField txtNombreTarea;
+    private javax.swing.JTextField txtRequerimiento;
+    private javax.swing.JTextField txtResponsable;
     // End of variables declaration//GEN-END:variables
 }

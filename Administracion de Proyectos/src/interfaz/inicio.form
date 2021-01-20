@@ -269,6 +269,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Costo proyectos (todos los recursos)"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCostoProyectoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnCostoProyectoPersonal">
               <Properties>
@@ -277,6 +280,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Costo proyectos (solo personal)"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCostoProyectoPersonalActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnRecursosLibres">
               <Properties>

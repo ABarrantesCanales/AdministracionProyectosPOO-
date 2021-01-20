@@ -37,7 +37,7 @@ public class inicio extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 String name = (String) comboActividades.getSelectedItem();
-                Empleado empleado = Empresa.getInstance().buscarEmpleado(name);
+                Empleado empleado = Empresa.getInstance().buscarEmpleadoNombre(name);
                 textActividades.setText("");
                 if(empleado != null || name != null){
                     textActividades.append(empleado.getNombre() + "\n");
@@ -210,9 +210,19 @@ public class inicio extends javax.swing.JFrame {
 
         btnCostoProyecto.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btnCostoProyecto.setText("Costo proyectos (todos los recursos)");
+        btnCostoProyecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCostoProyectoActionPerformed(evt);
+            }
+        });
 
         btnCostoProyectoPersonal.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btnCostoProyectoPersonal.setText("Costo proyectos (solo personal)");
+        btnCostoProyectoPersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCostoProyectoPersonalActionPerformed(evt);
+            }
+        });
 
         btnRecursosLibres.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btnRecursosLibres.setText("Recursos libres");
@@ -480,6 +490,9 @@ public class inicio extends javax.swing.JFrame {
                 model.addElement(p.getNombre());
             }
         }
+        if(model.isEmpty()){
+            model.addElement("No hay proyectos.");
+        }
         jListados.setModel(model);
     }//GEN-LAST:event_btnProyectosAtrasoActionPerformed
 
@@ -501,6 +514,9 @@ public class inicio extends javax.swing.JFrame {
             }else{
                 model.addElement("\t\t" + p.getDepaPrincipal());
             }
+        }
+        if(model.isEmpty()){
+            model.addElement("No hay proyectos.");
         }
         jListados.setModel(model);
     }//GEN-LAST:event_btnListarProyectosActionPerformed
@@ -524,6 +540,9 @@ public class inicio extends javax.swing.JFrame {
                 }
             }
         }
+        if(model.isEmpty()){
+            model.addElement("No hay personal.");
+        }
         jListados.setModel(model);
     }//GEN-LAST:event_btnPersonalDepaActionPerformed
 
@@ -534,6 +553,8 @@ public class inicio extends javax.swing.JFrame {
             if(r.getEstado() == false){
                 model.addElement(r.getNombre());
             }
+        }if(model.isEmpty()){
+            model.addElement("No hay recursos.");
         }
         jListados.setModel(model);
     }//GEN-LAST:event_btnRecursosLibresActionPerformed
@@ -548,6 +569,8 @@ public class inicio extends javax.swing.JFrame {
                     model.addElement("\t\t" + p.getNombre());
                 }
             }
+        }if(model.isEmpty()){
+            model.addElement("No hay jefes.");
         }
         jListados.setModel(model);
     }//GEN-LAST:event_btnPersonalConProyectoActionPerformed
@@ -651,6 +674,7 @@ public class inicio extends javax.swing.JFrame {
                 Empleado empleado = new Empleado(Double.parseDouble(txtSalario.getText()), txtNombre.getText(),
                 Integer.parseInt(txtCedula.getText()), Empresa.getInstance().buscarDepartamento(comboDepartamento.getSelectedItem().toString()));
                 Empresa.getInstance().addEmpleado(empleado);
+                JOptionPane.showMessageDialog(rootPane, "¡Empleado creado!");
                 txtNombre.setText("");
                 txtSalario.setText("");
                 txtCedula.setText("");
@@ -658,22 +682,38 @@ public class inicio extends javax.swing.JFrame {
             case "Departamento":
                 Departamento depa = new Departamento(txtNombre.getText());
                 Empresa.getInstance().addDepartamento(depa);
+                JOptionPane.showMessageDialog(rootPane, "¡Departamento creado!");
                 txtNombre.setText("");
                 break;
             case "Proyecto":
                 Proyecto proyecto = new Proyecto(txtNombre.getText(), datePickerCreacion.getDate(), 
                 Empresa.getInstance().buscarDepartamento(comboDepartamento.getSelectedItem().toString()));
                 Empresa.getInstance().addProyecto(proyecto);
+                JOptionPane.showMessageDialog(rootPane, "¡Proyecto creado!");
                 txtNombre.setText("");
                 datePickerCreacion.setDate(null);
                 break;
             case "Recurso":
                 Recursos recurso = new Recursos(txtNombre.getText());
                 Empresa.getInstance().addRecurso(recurso);
+                JOptionPane.showMessageDialog(rootPane, "¡Recurso creado!");
                 txtNombre.setText("");
                 break;
         }
     }//GEN-LAST:event_btnCrearObjetosActionPerformed
+
+    private void btnCostoProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCostoProyectoActionPerformed
+        ArrayList<Proyecto> proyectos = Empresa.getInstance().getListaProyectos();
+        DefaultListModel model = new DefaultListModel();
+//        for(Proyecto p: proyectos){
+//            
+//        }
+        jListados.setModel(model);
+    }//GEN-LAST:event_btnCostoProyectoActionPerformed
+
+    private void btnCostoProyectoPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCostoProyectoPersonalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCostoProyectoPersonalActionPerformed
 
     /**
      * 
