@@ -46,64 +46,88 @@ public class Empresa implements Serializable{
     }
     
     //Empleados
-    public void addEmpleado(Empleado em){
-        listaEmpleados.add(em);
+    public boolean addEmpleado(Empleado em){
+        if(buscarEmpleado(em.getNombre()) == null){
+            listaEmpleados.add(em);
+            return true;
+        }
+        return false;
     }
     
     public void addJefe(Jefe j){
         listaJefes.add(j);
     }
     
-    public Empleado buscarEmpleado(Empleado em){
+    public Empleado buscarEmpleado(String em){
         if(listaEmpleados.isEmpty()){
             return null;
         }
-        if(listaEmpleados.contains(em)){
-            return em;
+        for(Empleado e: listaEmpleados){
+            if(e.getNombre().equals(em)){
+                return e;
+            }
         }
         return null;
     }
 
     //Departamentos
-    public void addDepartamento(Empleado dep){
-        listaEmpleados.add(dep);
+    public boolean addDepartamento(Departamento dep){
+        if(buscarDepartamento(dep.getNombreDepartamento()) == null){
+            listaDepartamentos.add(dep);
+            return true;
+        }
+        return false;
     }
     
-    public Departamento buscarDepartamento(Departamento dep){
+    public Departamento buscarDepartamento(String dep){
         if(listaDepartamentos.isEmpty()){
             return null;
         }
-        if(listaDepartamentos.contains(dep)){
-            return dep;
+        for(Departamento d: listaDepartamentos){
+            if(d.getNombreDepartamento().equals(dep)){
+                return d;
+            }
         }
         return null;
     }
     //Proyectos
-    public void addProyecto(Proyecto p){
-        listaProyectos.add(p);
+    public boolean addProyecto(Proyecto p){
+        if(buscarProyecto(p.getNombre()) == null){
+            listaProyectos.add(p);
+            return true;
+        }
+        return false;
     }
     
-    public Proyecto buscarProyecto(Proyecto p){
+    public Proyecto buscarProyecto(String pro){
         if(listaProyectos.isEmpty()){
             return null;
         }
-        if(listaProyectos.contains(p)){
-            return p;
+        for(Proyecto p: listaProyectos){
+            if(p.getNombre().equals(pro)){
+                return p;
+            }
         }
         return null;
     }
     
     //Recursos
-    public void addRecurso(Recursos r){
-        listaRecursos.add(r);
+    public boolean addRecurso(Recursos r){
+        if(buscarRecurso(r.getNombre()) == null){
+            listaRecursos.add(r);
+            return true;
+        }
+        return false;
     }
     
-    public Recursos buscarRecurso(Recursos r){
+    public Recursos buscarRecurso(String ree){
         if(listaRecursos.isEmpty()){
             return null;
         }
-        if(listaRecursos.contains(r)){
-            return r;
+        for(Recursos r: listaRecursos){
+            if(r.getNombre().equals(ree)){
+                return r;
+            }
         }
         return null;
     }

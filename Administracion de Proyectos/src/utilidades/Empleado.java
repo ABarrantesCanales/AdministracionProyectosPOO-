@@ -21,18 +21,41 @@ public class Empleado extends Persona{
         super(salario, nombreEmpleado, ced);
         this.departamento = depa;
         depa.addEmpleado(this);
+        proyectos = new ArrayList<>();
+        tareas = new ArrayList<>();
     }
     
+    
+    //Proyectos
     public void addProyecto(Proyecto p){
         proyectos.add(p);
     }
     
-    public Proyecto buscarProyecto(Proyecto p){
+    public Proyecto buscarProyecto(String pro){
         if(proyectos.isEmpty()){
             return null;
         }
-        if(proyectos.contains(p)){
-            return p;
+        for(Proyecto p: proyectos){
+            if(p.getNombre().equals(pro)){
+                return p;
+            }
+        }
+        return null;
+    }
+    
+    //Tareas
+    public void addTarea(Tarea t){
+        tareas.add(t);
+    }
+    
+    public Tarea buscarTarea(String tarea){
+        if(tareas.isEmpty()){
+            return null;
+        }
+        for(Tarea t: tareas){
+            if(t.getNombre().equals(tarea)){
+                return t;
+            }
         }
         return null;
     }
@@ -43,9 +66,15 @@ public class Empleado extends Persona{
         return proyectos;
     }
 
+    public ArrayList<Tarea> getTareas() {
+        return tareas;
+    }
+
     public Departamento getDepartamento() {
         return departamento;
     }
+    
+    
     
     //Setters
     public void setDepartamento(Departamento departamento) {

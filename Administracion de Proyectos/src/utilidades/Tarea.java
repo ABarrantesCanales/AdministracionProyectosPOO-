@@ -20,10 +20,11 @@ public class Tarea {
     private Date fechaEntrega;
     private boolean estado;
     private boolean requerimientos;
+    private Proyecto proyecto;
     private ArrayList<Tarea> listaRequerimientos;
     private ArrayList<Empleado> Responsables;
 
-    public Tarea(String nombre, Date fechaEntrega, double duracion, double horasR, boolean requerimientos, int id) {
+    public Tarea(String nombre, Date fechaEntrega, double duracion, double horasR, boolean requerimientos, int id, Proyecto proyecto) {
         this.nombre = nombre;
         this.fechaEntrega = fechaEntrega;
         this.indentificador++;
@@ -32,6 +33,7 @@ public class Tarea {
         this.estado = false;
         this.indentificador = id;
         this.requerimientos = requerimientos;
+        this.proyecto = proyecto;
         if(requerimientos){
             this.listaRequerimientos = new ArrayList<>();
         }
@@ -61,6 +63,11 @@ public class Tarea {
     public boolean getEstado() {
         return estado;
     }
+
+    public Proyecto getProyecto() {
+        return proyecto;
+    }
+    
     
     public ArrayList<Tarea> getRequerimientos(){
         return listaRequerimientos; 
